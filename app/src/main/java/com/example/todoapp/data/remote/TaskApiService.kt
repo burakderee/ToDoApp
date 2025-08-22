@@ -8,7 +8,7 @@ import com.example.todoapp.data.remote.TaskDto
 
 interface TaskApiService {
     @GET("todos")
-    suspend fun getAllTodos(): List<TaskDto>
+    suspend fun getTodos(): List<TaskDto>
 
     @POST("todos")
     suspend fun addTodo(@Body task: TaskDto)

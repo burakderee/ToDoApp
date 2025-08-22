@@ -1,18 +1,39 @@
-package com.example.todoapp.data
+package com.example.todoapp.data.local
 
+import androidx.lifecycle.LiveData
 import com.example.todoapp.data.remote.TaskApiService
-import com.example.todoapp.data.local.TaskDao
-import com.example.todoapp.data.remote.TaskDto
 import javax.inject.Inject
-import javax.inject.Singleton
+import android.util.Log
 
-@Singleton
 class TaskRepository @Inject constructor(
-    private val apiService: TaskApiService,
-    private val taskDao: TaskDao
+    private val taskDao: TaskDao,
+    private val taskApiService: TaskApiService
 ) {
-    suspend fun getAndSaveTodos(): List<TaskDto> {
-        val remoteTasks = apiService.getAllTodos()
-        return remoteTasks
+    fun getAllTasks(): LiveData<List<TaskEntity>> {
+        return taskDao.getAllTasks()
+    }
+
+    suspend fun updateTask(task: TaskEntity) {
+        taskDao.updateTask(task)
+    }
+
+    suspend fun getAndSaveTodos() {
+        try {
+            val todos = taskApiService.getTodos()
+            todos.forEach { todo ->
+                taskDao.insertTask(TaskEntity(title = todo.title, isCompleted = todo.completed))
+            }
+            Log.d("TaskRepository", "API'den ${todos.size} adet görev çekildi.")
+        } catch (e: Exception) {
+            Log.e("TaskRepository", "API'den veri çekerken hata oluştu: ${e.message}")
+        }
+    }
+
+    suspend fun addTask(task: TaskEntity) {
+        taskDao.insertTask(task)
+    }
+
+    suspend fun deleteTask(task: TaskEntity) {
+        taskDao.deleteTask(task)
     }
 }
