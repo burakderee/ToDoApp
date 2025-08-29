@@ -18,6 +18,15 @@ class MainActivity : AppCompatActivity() {
     private lateinit var recyclerView: RecyclerView
     private lateinit var fabAddTask: FloatingActionButton
 
+    private fun showEditDialog(task: TaskEntity) {
+        val dialog = EditTaskDialogFragment.newInstance(task)
+        dialog.show(supportFragmentManager, "EditTaskDialog")
+    }
+
+    fun updateTask(task: TaskEntity) {
+        viewModel.updateTask(task)
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -31,6 +40,9 @@ class MainActivity : AppCompatActivity() {
             },
             onDeleteClicked = { task ->
                 viewModel.deleteTask(task)
+            },
+            onEditClicked = { task ->
+                showEditDialog(task)
             }
         )
 
