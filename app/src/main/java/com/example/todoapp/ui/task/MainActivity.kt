@@ -42,7 +42,8 @@ class MainActivity : AppCompatActivity() {
                 viewModel.deleteTask(task)
             },
             onEditClicked = { task ->
-                showEditDialog(task)
+                EditTaskDialogFragment.newInstance(task).show(supportFragmentManager, "EditTaskDialog")
+                //showEditDialog(task)
             }
         )
 

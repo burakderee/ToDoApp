@@ -31,7 +31,7 @@ class TaskAdapter(
         private val titleTextView: TextView = view.findViewById(R.id.title_text_view)
         private val completedCheckBox: CheckBox = view.findViewById(R.id.completed_checkbox)
         private val deleteButton: TextView = view.findViewById(R.id.delete_button)
-        private val editButton: TextView = view.findViewById(R.id.edit_button_button)
+        private val editButton: TextView = view.findViewById(R.id.edit_button)
 
         fun bind(task: TaskEntity) {
             titleTextView.text = task.title
