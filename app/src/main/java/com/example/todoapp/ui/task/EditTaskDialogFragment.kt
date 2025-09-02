@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
+import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
@@ -43,10 +44,12 @@ class EditTaskDialogFragment : DialogFragment() {
                     val updatedTask = taskToEdit.copy(title = newTitle)
                     viewModel.updateTask(updatedTask)
                     dismiss()
+                    Toast.makeText(requireContext(), "Görev başarıyla güncellendi!", Toast.LENGTH_SHORT).show()
                 }
             }
         }
     }
+
 
     companion object {
         fun newInstance(task: TaskEntity) = EditTaskDialogFragment().apply {

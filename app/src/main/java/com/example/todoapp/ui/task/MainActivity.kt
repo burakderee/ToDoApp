@@ -1,6 +1,10 @@
 package com.example.todoapp.ui.task
 
+import android.content.Context
+import android.content.DialogInterface
 import android.os.Bundle
+import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -8,6 +12,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.example.todoapp.R
 import dagger.hilt.android.AndroidEntryPoint
 import androidx.activity.viewModels
+import androidx.appcompat.app.AlertDialog
 import com.example.todoapp.data.local.TaskEntity
 
 @AndroidEntryPoint
@@ -39,7 +44,18 @@ class MainActivity : AppCompatActivity() {
                 viewModel.updateTask(updatedTask)
             },
             onDeleteClicked = { task ->
-                viewModel.deleteTask(task)
+                AlertDialog.Builder(this)
+                    .setTitle("Görevi Kaldır")
+                    .setMessage("Görevi kaldırmak istediğine emin misin?")
+                    .setPositiveButton("Evet") { dialog, which ->
+                        viewModel.deleteTask(task)
+
+                        Toast.makeText(this, "Görev başarıyla kaldırıldı.", Toast.LENGTH_SHORT).show()
+                    }
+                    .setNegativeButton("Hayır") { dialog, which ->
+                        Toast.makeText(this, "Silme işlemi iptal edildi.", Toast.LENGTH_SHORT).show()
+                    }
+                    .show()
             },
             onEditClicked = { task ->
                 EditTaskDialogFragment.newInstance(task).show(supportFragmentManager, "EditTaskDialog")
@@ -56,6 +72,7 @@ class MainActivity : AppCompatActivity() {
 
         fabAddTask.setOnClickListener {
             AddTaskDialogFragment().show(supportFragmentManager, "AddTaskDialog")
+
         }
     }
 }

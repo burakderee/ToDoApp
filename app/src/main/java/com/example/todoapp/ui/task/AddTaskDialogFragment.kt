@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
+import android.widget.Toast
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
 import com.example.todoapp.R
@@ -34,6 +35,7 @@ class AddTaskDialogFragment : DialogFragment() {
             val taskTitle = editText.text.toString()
             if (taskTitle.isNotEmpty()) {
                 viewModel.addTask(taskTitle)
+                Toast.makeText(requireContext(), "Görev başarıyla eklendi!", Toast.LENGTH_SHORT).show()
                 dismiss()
             }
         }
