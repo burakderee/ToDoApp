@@ -1,9 +1,6 @@
-package com.example.todoapp.ui.task
+package com.example.todoapp.features.task
 
-import android.content.Context
-import android.content.DialogInterface
 import android.os.Bundle
-import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager

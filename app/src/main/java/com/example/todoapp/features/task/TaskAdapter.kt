@@ -1,4 +1,4 @@
-package com.example.todoapp.ui.task
+package com.example.todoapp.features.task
 
 import android.view.View
 import android.view.LayoutInflater
@@ -10,7 +10,6 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.todoapp.R
 import com.example.todoapp.data.local.TaskEntity
-import com.google.android.material.card.MaterialCardView
 
 class TaskAdapter(
     private val onCheckedChanged: (TaskEntity) -> Unit,

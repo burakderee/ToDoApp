@@ -1,9 +1,11 @@
-package com.example.todoapp.data.local
+package com.example.todoapp.data
 
+import android.util.Log
 import androidx.lifecycle.LiveData
+import com.example.todoapp.data.local.TaskDao
+import com.example.todoapp.data.local.TaskEntity
 import com.example.todoapp.data.remote.TaskApiService
 import javax.inject.Inject
-import android.util.Log
 
 class TaskRepository @Inject constructor(
     private val taskDao: TaskDao,

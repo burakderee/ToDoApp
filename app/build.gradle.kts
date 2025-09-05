@@ -4,6 +4,7 @@ plugins {
     id("com.google.dagger.hilt.android")
     id("kotlin-kapt")
     id("kotlin-parcelize")
+    alias(libs.plugins.kotlin.compose)
 }
 
 android {
@@ -35,6 +36,9 @@ android {
     kotlinOptions {
         jvmTarget = "17"
     }
+    buildFeatures {
+        compose = true
+    }
 }
 
 dependencies {
@@ -42,9 +46,19 @@ dependencies {
     implementation("androidx.appcompat:appcompat:1.6.1")
     implementation("com.google.android.material:material:1.12.0")
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
-    implementation("com.google.dagger:hilt-android:2.51.1")
+    implementation("com.google.dagger:hilt-android:2.52")
     implementation(libs.androidx.recyclerview)
-    kapt("com.google.dagger:hilt-compiler:2.51.1")
+    implementation(libs.androidx.activity.compose)
+    implementation(platform(libs.androidx.compose.bom))
+    implementation(libs.androidx.ui)
+    implementation(libs.androidx.ui.graphics)
+    implementation(libs.androidx.ui.tooling.preview)
+    implementation(libs.androidx.material3)
+    androidTestImplementation(platform(libs.androidx.compose.bom))
+    androidTestImplementation(libs.androidx.ui.test.junit4)
+    debugImplementation(libs.androidx.ui.tooling)
+    debugImplementation(libs.androidx.ui.test.manifest)
+    kapt("com.google.dagger:hilt-compiler:2.52")
     val room_version = "2.6.1"
     implementation("androidx.room:room-runtime:$room_version")
     kapt("androidx.room:room-compiler:$room_version")
@@ -57,4 +71,9 @@ dependencies {
     implementation("com.squareup.okhttp3:okhttp:4.10.0")
     implementation("androidx.fragment:fragment-ktx:1.6.2")
     implementation("com.squareup.okhttp3:logging-interceptor:4.10.0")
+    androidTestImplementation("com.google.dagger:hilt-android-testing:2.52")
+    kaptAndroidTest("com.google.dagger:hilt-compiler:2.52")
+    testImplementation("com.google.dagger:hilt-android-testing:2.52")
+    kaptTest("com.google.dagger:hilt-compiler:2.52")
+
 }

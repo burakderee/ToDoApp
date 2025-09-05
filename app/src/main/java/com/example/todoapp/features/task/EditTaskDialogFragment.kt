@@ -1,4 +1,4 @@
-package com.example.todoapp.ui.task
+package com.example.todoapp.features.task
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,13 +7,15 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
+import androidx.core.os.bundleOf
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
 import com.example.todoapp.R
+import com.example.todoapp.data.local.TaskEntity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class AddTaskDialogFragment : DialogFragment() {
+class EditTaskDialogFragment : DialogFragment() {
 
     private val viewModel: TaskViewModel by viewModels()
 
@@ -31,13 +33,27 @@ class AddTaskDialogFragment : DialogFragment() {
         val editText = view.findViewById<EditText>(R.id.editTextTaskTitle)
         val saveButton = view.findViewById<Button>(R.id.buttonSaveTask)
 
-        saveButton.setOnClickListener {
-            val taskTitle = editText.text.toString()
-            if (taskTitle.isNotEmpty()) {
-                viewModel.addTask(taskTitle)
-                Toast.makeText(requireContext(), "Görev başarıyla eklendi!", Toast.LENGTH_SHORT).show()
-                dismiss()
+        val taskToEdit = arguments?.getParcelable<TaskEntity>("task")
+
+        if (taskToEdit != null) {
+            editText.setText(taskToEdit.title)
+
+            saveButton.setOnClickListener {
+                val newTitle = editText.text.toString()
+                if (newTitle.isNotEmpty()) {
+                    val updatedTask = taskToEdit.copy(title = newTitle)
+                    viewModel.updateTask(updatedTask)
+                    dismiss()
+                    Toast.makeText(requireContext(), "Görev başarıyla güncellendi!", Toast.LENGTH_SHORT).show()
+                }
             }
+        }
+    }
+
+
+    companion object {
+        fun newInstance(task: TaskEntity) = EditTaskDialogFragment().apply {
+            arguments = bundleOf("task" to task)
         }
     }
 }
