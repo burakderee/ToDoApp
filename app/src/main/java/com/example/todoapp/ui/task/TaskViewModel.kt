@@ -1,18 +1,28 @@
-package com.example.todoapp.features.task
+package com.example.todoapp.ui.task
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.todoapp.data.SharedPreferencesManager
 import com.example.todoapp.data.local.TaskEntity
-import com.example.todoapp.data.TaskRepository
+import com.example.todoapp.data.repository.TaskRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
-
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.switchMap
 @HiltViewModel
-class TaskViewModel @Inject constructor(
-    private val taskRepository: TaskRepository
-) : ViewModel() {
+class TaskViewModel
+@Inject constructor(
+    private val taskRepository: TaskRepository,
+    private val sharedPreferencesManager: SharedPreferencesManager,
 
+) : ViewModel() {
+    private val _category = MutableLiveData<String>()
+
+    fun setCategory(category: String) {
+        _category.value = category
+    }
     val tasks = taskRepository.getAllTasks()
 
     fun updateTask(task: TaskEntity) {
@@ -30,7 +40,8 @@ class TaskViewModel @Inject constructor(
 
     fun addTask(title: String) {
         viewModelScope.launch {
-            val task = TaskEntity(title = title)
+            val userId = sharedPreferencesManager.getUserId() ?: return@launch
+            val task = TaskEntity(title = title, userId = userId)
             taskRepository.addTask(task)
         }
     }

@@ -1,4 +1,4 @@
-package com.example.todoapp.features.task
+package com.example.todoapp.ui
 
 import android.app.Application
 import dagger.hilt.android.HiltAndroidApp

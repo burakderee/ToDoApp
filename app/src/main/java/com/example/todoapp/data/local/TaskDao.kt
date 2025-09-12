@@ -11,8 +11,8 @@ import androidx.room.Query
 @Dao
 interface TaskDao {
 
-    @Query("SELECT * FROM tasks")
-    fun getAllTasks(): LiveData<List<TaskEntity>>
+    @Query("SELECT * FROM tasks WHERE userId = :userId ORDER BY id DESC")
+    fun getAllTasks(userId: String): LiveData<List<TaskEntity>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertTask(task: TaskEntity)

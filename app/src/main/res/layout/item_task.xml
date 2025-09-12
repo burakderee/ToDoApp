@@ -4,16 +4,23 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="8dp"
-    app:cardCornerRadius="8dp"
-    app:cardElevation="4dp">
+    app:cardCornerRadius="0dp"
+    android:layout_marginTop="1dp"
+    app:cardBackgroundColor="@color/semi_transparent_white"
+    app:cardElevation="1dp">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:gravity="center_vertical"
         android:orientation="horizontal"
-        android:padding="16dp"
-        android:gravity="center_vertical">
+        android:padding="16dp">
+
+        <CheckBox
+            android:id="@+id/completed_checkbox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp" />
 
         <TextView
             android:id="@+id/title_text_view"
@@ -23,31 +30,6 @@
             android:textSize="18sp"
             android:textStyle="bold"
             tools:text="Örnek Görev Başlığı" />
-
-        <CheckBox
-            android:id="@+id/completed_checkbox"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp" />
-        <TextView
-            android:id="@+id/edit_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:text="Düzenle"
-            android:textColor="@android:color/holo_blue_dark"
-            android:textStyle="bold"
-            android:padding="8dp"/>
-
-        <TextView
-            android:id="@+id/delete_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:text="Sil"
-            android:textColor="@android:color/holo_red_dark"
-            android:textStyle="bold"
-            android:padding="8dp"/>
 
     </LinearLayout>
 

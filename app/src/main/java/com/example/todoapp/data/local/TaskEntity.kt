@@ -11,5 +11,6 @@ data class TaskEntity(
     @PrimaryKey(autoGenerate = true)
     val id: Int = 0,
     val title: String,
-    val isCompleted: Boolean = false
+    val isCompleted: Boolean = false,
+    val userId: String
 ) : Parcelable

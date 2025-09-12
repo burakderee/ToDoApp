@@ -1,4 +1,4 @@
-package com.example.todoapp.features.task
+package com.example.todoapp.ui.task
 
 import android.view.View
 import android.view.LayoutInflater
@@ -12,7 +12,7 @@ import com.example.todoapp.R
 import com.example.todoapp.data.local.TaskEntity
 
 class TaskAdapter(
-    private val onCheckedChanged: (TaskEntity) -> Unit,
+    private val onCheckedChanged: (TaskEntity, Boolean) -> Unit,
     private val onDeleteClicked: (TaskEntity) -> Unit,
     private val onEditClicked: (TaskEntity) -> Unit
 ) : ListAdapter<TaskEntity, TaskAdapter.TaskViewHolder>(TaskDiffCallback()) {
@@ -29,8 +29,6 @@ class TaskAdapter(
     inner class TaskViewHolder(private val view: View) : RecyclerView.ViewHolder(view) {
         private val titleTextView: TextView = view.findViewById(R.id.title_text_view)
         private val completedCheckBox: CheckBox = view.findViewById(R.id.completed_checkbox)
-        private val deleteButton: TextView = view.findViewById(R.id.delete_button)
-        private val editButton: TextView = view.findViewById(R.id.edit_button)
 
         fun bind(task: TaskEntity) {
             titleTextView.text = task.title
@@ -41,14 +39,8 @@ class TaskAdapter(
 
             completedCheckBox.setOnCheckedChangeListener { _, isChecked ->
                 val updatedTask = task.copy(isCompleted = isChecked)
-                onCheckedChanged(updatedTask)
-            }
+                onCheckedChanged(updatedTask,isChecked)
 
-            deleteButton.setOnClickListener {
-                onDeleteClicked(task)
-            }
-            editButton.setOnClickListener {
-                onEditClicked(task)
             }
         }
     }

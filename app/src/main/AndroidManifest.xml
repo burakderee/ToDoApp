@@ -5,7 +5,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
-        android:name=".features.task.TodoApplication"
+        android:name=".ui.TodoApplication"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -14,8 +14,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.ToDoApp">
+
         <activity
-            android:name=".features.login.LoginActivity"
+            android:name=".ui.login.LoginActivity"
             android:exported="true"
             android:label="@string/title_activity_login"
             android:theme="@style/Theme.ToDoApp">
@@ -24,11 +25,19 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
-            android:name=".features.task.MainActivity"
+            android:name=".features.home.HomeActivity"
             android:exported="false">
         </activity>
-    </application>
+        <activity
+            android:name=".ui.register.RegisterActivity"
+            android:exported="false">
+        </activity>
 
+        <activity
+            android:name=".ui.main.MainActivity"
+            android:exported="false">
+        </activity>
+
+    </application>
 </manifest>
