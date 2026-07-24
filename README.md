@@ -1,4 +1,4 @@
-<img width="352" height="781" alt="Ekran görüntüsü 2026-07-24 195220" src="https://github.com/user-attachments/assets/d20ae41b-7314-4a78-895e-4fa526fc9a71" /># 📱 ToDoApp - Gelişmiş Görev Yönetim Uygulaması
+# 📱 ToDoApp - Gelişmiş Görev Yönetim Uygulaması
 
 ToDoApp, kullanıcıların günlük görevlerini organize edebileceği, kategorilere ayırabileceği ve hava durumu verileriyle birlikte planlama yapabileceği gelişmiş bir Android uygulamasıdır.
 
